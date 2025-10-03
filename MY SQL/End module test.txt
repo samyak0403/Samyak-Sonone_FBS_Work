@@ -1,0 +1,69 @@
+SET 'A'
+
+
+
+FRN no:- 008
+
+
+Q1) Ans:= select customer_name from customers
+          order by customer_name;
+
+Q2) Ans:= select price from product
+          order by price  desc limit 10;
+
+Q3) Ans:= select salary from employees
+          order by salary desc limit 1,1;
+
+Q4) ans:=select city ,count(*) from customers
+          group by city;
+
+
+Q5) Ans:=select department_id ,sum(salary) from employee
+       group by department_id 
+       having sum(salary) > 200000;
+
+
+Q6)select substring ("phone_number"8,4),("customer_name", 3);
+
+Q7) Ans:= select * from product from prouduct
+           where product_name="%Pro%";
+
+Q8) Ans:= select course_id, count(*) from students
+ group by course_id
+ having count(*)>=30;
+
+Q9)  Ans:= select month(order_date), count(*)from orders
+ group by month(order_date)
+ order by order_date;
+
+Q10) Ans:= select department_id, max(salary),min(salary) from employees
+ group by department_id;
+
+Q11) Ans:= 'Data'
+ 
+Q12) Ans:= a) ORDER BY DESC
+
+Q13) Ans:=a) ASC
+
+Q14) Ans:= b) 15.68
+
+Q15) Ans:=b) COUNT() 
+
+Q16) Ans:=select c.customer_id,
+       c.customer_name,
+       avg(o.total_amount) AS avg_order_value
+from Customers c
+join Orders o ON c.customer_id = o.customer_id
+group by c.customer_id, c.customer_name
+having count(o.order_id) > 2;
+
+Q17) Ans:= select p.product_id,
+       p.product_name,
+       count(s.sale_id) AS sales_count
+from Products p
+inner join Sales s ON p.product_id = s.product_id
+group by p.product_id, p.product_name
+having count(s.sale_id) > 50;
+
+
+

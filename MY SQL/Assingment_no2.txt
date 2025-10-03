@@ -1,0 +1,926 @@
+Use the following Schema to perform the given set of assignment.
+
+Tables-
+
+1. Member – It contains information about the members
+
+
+Ans:-mysql> create table member
+    -> (member_id int unique,
+    -> member_name varchar(30),
+    -> member_address varchar(50),
+    -> acc_open_date date,
+    -> membership_type varchar(20),
+    -> fees_paid int,
+    -> max_book_allowed int,
+    -> penalty_amount decimal(4,2)
+    -> );
+Query OK, 0 rows affected (0.07 sec)
+
+mysql> desc member;
++------------------+--------------+------+-----+---------+-------+
+| Field            | Type         | Null | Key | Default | Extra |
++------------------+--------------+------+-----+---------+-------+
+| member_id        | int          | YES  | UNI | NULL    |       |
+| member_name      | varchar(30)  | YES  |     | NULL    |       |
+| member_address   | varchar(50)  | YES  |     | NULL    |       |
+| acc_open_date    | date         | YES  |     | NULL    |       |
+| membership_type  | varchar(20)  | YES  |     | NULL    |       |
+| fees_paid        | int          | YES  |     | NULL    |       |
+| max_book_allowed | int          | YES  |     | NULL    |       |
+| penalty_amount   | decimal(4,2) | YES  |     | NULL    |       |
++------------------+--------------+------+-----+---------+-------+
+8 rows in set (0.00 sec)
+
+
+2. Books- It contains information about the books belongs to the library
+
+
+Ans:-mysql> create table books
+    -> (book_no int,
+    -> book_name varchar(30),
+    -> author_name varchar(30),
+    -> cost decimal(7,2),
+    -> category char(10)
+    -> );
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> desc books;
++-------------+--------------+------+-----+---------+-------+
+| Field       | Type         | Null | Key | Default | Extra |
++-------------+--------------+------+-----+---------+-------+
+| book_no     | int          | YES  |     | NULL    |       |
+| book_name   | varchar(30)  | YES  |     | NULL    |       |
+| author_name | varchar(30)  | YES  |     | NULL    |       |
+| cost        | decimal(7,2) | YES  |     | NULL    |       |
+| category    | char(10)     | YES  |     | NULL    |       |
++-------------+--------------+------+-----+---------+-------+
+5 rows in set (0.01 sec)
+
+Issue – It contains the information about issue of the books
+
+Ans:-mysql> create table issue
+    -> (lib_issue_id int,
+    -> book_no int,
+    -> member_id int,
+    -> issue_date date,
+    -> return_date date);
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> desc issue;
++--------------+------+------+-----+---------+-------+
+| Field        | Type | Null | Key | Default | Extra |
++--------------+------+------+-----+---------+-------+
+| lib_issue_id | int  | YES  |     | NULL    |       |
+| book_no      | int  | YES  |     | NULL    |       |
+| member_id    | int  | YES  |     | NULL    |       |
+| issue_date   | date | YES  |     | NULL    |       |
+| return_date  | date | YES  |     | NULL    |       |
++--------------+------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+
+Task / Problems:
+
+1) Create the table Member, Books and Issue without any constraints as
+mentioned in the schema description above.
+
+Ans:-
+
+-mysql> create table member
+    -> (member_id int unique,
+    -> member_name varchar(30),
+    -> member_address varchar(50),
+    -> acc_open_date date,
+    -> membership_type varchar(20),
+    -> fees_paid int,
+    -> max_book_allowed int,
+    -> penalty_amount decimal(4,2)
+    -> );
+
+-mysql> create table books
+    -> (book_no int,
+    -> book_name varchar(30),
+    -> author_name varchar(30),
+    -> cost decimal(7,2),
+    -> category char(10)
+    -> );
+
+
+
+-mysql> create table issue
+    -> (lib_issue_id int,
+    -> book_no int,
+    -> member_id int,
+    -> issue_date date,
+    -> return_date date);
+
+
+2) View the structure of the tables.
+
+
+
+mysql> desc member;
++------------------+--------------+------+-----+---------+-------+
+| Field            | Type         | Null | Key | Default | Extra |
++------------------+--------------+------+-----+---------+-------+
+| member_id        | int          | YES  | UNI | NULL    |       |
+| member_name      | varchar(30)  | YES  |     | NULL    |       |
+| member_address   | varchar(50)  | YES  |     | NULL    |       |
+| acc_open_date    | date         | YES  |     | NULL    |       |
+| membership_type  | varchar(20)  | YES  |     | NULL    |       |
+| fees_paid        | int          | YES  |     | NULL    |       |
+| max_book_allowed | int          | YES  |     | NULL    |       |
+| penalty_amount   | decimal(4,2) | YES  |     | NULL    |       |
++------------------+--------------+------+-----+---------+-------+
+8 rows in set (0.00 sec)
+
+mysql> desc books;
++-------------+--------------+------+-----+---------+-------+
+| Field       | Type         | Null | Key | Default | Extra |
++-------------+--------------+------+-----+---------+-------+
+| book_no     | int          | YES  |     | NULL    |       |
+| book_name   | varchar(30)  | YES  |     | NULL    |       |
+| author_name | varchar(30)  | YES  |     | NULL    |       |
+| cost        | decimal(7,2) | YES  |     | NULL    |       |
+| category    | char(10)     | YES  |     | NULL    |       |
++-------------+--------------+------+-----+---------+-------+
+5 rows in set (0.01 sec)
+
+
+mysql> desc issue;
++--------------+------+------+-----+---------+-------+
+| Field        | Type | Null | Key | Default | Extra |
++--------------+------+------+-----+---------+-------+
+| lib_issue_id | int  | YES  |     | NULL    |       |
+| book_no      | int  | YES  |     | NULL    |       |
+| member_id    | int  | YES  |     | NULL    |       |
+| issue_date   | date | YES  |     | NULL    |       |
+| return_date  | date | YES  |     | NULL    |       |
++--------------+------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+3) Drop the Member table
+
+
+Ans:-
+mysql> drop table member;
+Query OK, 0 rows affected (0.03 sec)
+
+4) Create the table Member again as per the schema description with the
+following constraints.
+a. Member_Id – Primary Key
+b. Membership_type - ‘Lifetime’,’ Annual’, ‘Half Yearly’,’ Quarterly’
+
+
+Ans:-mysql> create table member
+    -> (member_id int primary key,
+    -> member_name varchar(30),
+    -> member_addresss varchar(50),
+    -> acc_open_date date,
+    -> membership_type varchar(20)  CHECK (Membership_type IN ('Lifetime', 'Annual', 'Half Yearly', 'Quarterly')),
+    -> fees_paid int,
+    -> max_book_allowed int,
+    -> peanalty_amount decimal(7,2)
+    -> );
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> desc member;
++------------------+--------------+------+-----+---------+-------+
+| Field            | Type         | Null | Key | Default | Extra |
++------------------+--------------+------+-----+---------+-------+
+| member_id        | int          | NO   | PRI | NULL    |       |
+| member_name      | varchar(30)  | YES  |     | NULL    |       |
+| member_addresss  | varchar(50)  | YES  |     | NULL    |       |
+| acc_open_date    | date         | YES  |     | NULL    |       |
+| membership_type  | varchar(20)  | YES  |     | NULL    |       |
+| fees_paid        | int          | YES  |     | NULL    |       |
+| max_book_allowed | int          | YES  |     | NULL    |       |
+| peanalty_amount  | decimal(7,2) | YES  |     | NULL    |       |
++------------------+--------------+------+-----+---------+-------+
+8 rows in set (0.01 sec)
+
+
+5) Modify the table Member increase the width of the member name to 30
+characters.
+
+
+Ans:-
+mysql> alter table member
+    -> modify column member_name varchar(30);
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc member;
++------------------+--------------+------+-----+---------+-------+
+| Field            | Type         | Null | Key | Default | Extra |
++------------------+--------------+------+-----+---------+-------+
+| member_id        | int          | NO   | PRI | NULL    |       |
+| member_name      | varchar(30)  | YES  |     | NULL    |       |
+| member_addresss  | varchar(50)  | YES  |     | NULL    |       |
+| acc_open_date    | date         | YES  |     | NULL    |       |
+| membership_type  | varchar(20)  | YES  |     | NULL    |       |
+| fees_paid        | int          | YES  |     | NULL    |       |
+| max_book_allowed | int          | YES  |     | NULL    |       |
+| peanalty_amount  | decimal(7,2) | YES  |     | NULL    |       |
++------------------+--------------+------+-----+---------+-------+
+8 rows in set (0.00 sec)
+
+
+6) Add a column named as Reference of Char(30) to Issue table.
+
+
+Ans:-
+mysql> alter table issue
+    -> add column reference char(30);
+Query OK, 0 rows affected (0.08 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc issue;
++--------------+----------+------+-----+---------+-------+
+| Field        | Type     | Null | Key | Default | Extra |
++--------------+----------+------+-----+---------+-------+
+| lib_issue_id | int      | YES  |     | NULL    |       |
+| book_no      | int      | YES  |     | NULL    |       |
+| member_id    | int      | YES  |     | NULL    |       |
+| issue_date   | date     | YES  |     | NULL    |       |
+| return_date  | date     | YES  |     | NULL    |       |
+| reference    | char(30) | YES  |     | NULL    |       |
++--------------+----------+------+-----+---------+-------+
+6 rows in set (0.00 sec)
+
+
+7) Delete/Drop the column Reference from Issue.
+
+Ans:-
+mysql> alter table issue
+    -> drop column reference;
+Query OK, 0 rows affected (0.07 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc issue;
++--------------+------+------+-----+---------+-------+
+| Field        | Type | Null | Key | Default | Extra |
++--------------+------+------+-----+---------+-------+
+| lib_issue_id | int  | YES  |     | NULL    |       |
+| book_no      | int  | YES  |     | NULL    |       |
+| member_id    | int  | YES  |     | NULL    |       |
+| issue_date   | date | YES  |     | NULL    |       |
+| return_date  | date | YES  |     | NULL    |       |
++--------------+------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+
+8) Rename the table Issue to Lib_Issue
+
+
+Ans:-mysql> rename table issue to lib_issue;
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> show tables;
++--------------------------+
+| Tables_in_assingment_no2 |
++--------------------------+
+| books                    |
+| lib_issue                |
+| member                   |
++--------------------------+
+
+
+9) Insert following data in table Member
+
+Ans:-mysql> insert into member(member_id ,member_name,member_address, acc_open_date, membership_type, fees_paid, max_book_allowed, peanalty_amount)
+    -> values(1,'richa sharma','pune','2010-12-05','lifetime',25000,5,50.00),
+    -> (2,'garima sharma','pune','2025-09-26','annual',1000,3,null);
+Query OK, 2 rows affected (0.01 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> table member;
++-----------+---------------+----------------+---------------+-----------------+-----------+------------------+-----------------+
+| member_id | member_name   | member_address | acc_open_date | membership_type | fees_paid | max_book_allowed | peanalty_amount |
++-----------+---------------+----------------+---------------+-----------------+-----------+------------------+-----------------+
+|         1 | richa sharma  | pune           | 2010-12-05    | lifetime        |     25000 |                5 |           50.00 |
+|         2 | garima sharma | pune           | 2025-09-26    | annual          |      1000 |                3 |            NULL |
++-----------+---------------+----------------+---------------+-----------------+-----------+------------------+-----------------+
+2 rows in set (0.00 sec)
+
+10) Insert at least 5 records with suitable data
+
+Ans:-mysql> insert into member(member_id ,member_name,member_address, acc_open_date, membership_type, fees_paid, max_book_allowed, peanalty_amount)
+    -> values (3,'sammy','akola','2020-8-03','Quarterly',5000,8,35.12),
+    ->  (4,'harsh','wakad','2022-5-23','half yearly',1000,3,null),
+    ->  (5,'nikita','alapur','2025-3-12','Annual',10000,5,120.25);
+Query OK, 3 rows affected (0.01 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> table member;
++-----------+---------------+----------------+---------------+-----------------+-----------+------------------+-----------------+
+| member_id | member_name   | member_address | acc_open_date | membership_type | fees_paid | max_book_allowed | peanalty_amount |
++-----------+---------------+----------------+---------------+-----------------+-----------+------------------+-----------------+
+|         1 | richa sharma  | pune           | 2010-12-05    | lifetime        |     25000 |                5 |           50.00 |
+|         2 | garima sharma | pune           | 2025-09-26    | annual          |      1000 |                3 |            NULL |
+|         3 | sammy         | akola          | 2020-08-03    | Quarterly       |      5000 |                8 |           35.12 |
+|         4 | harsh         | wakad          | 2022-05-23    | half yearly     |      1000 |                3 |            NULL |
+|         5 | nikita        | alapur         | 2025-03-12    | Annual          |     10000 |                5 |          120.25 |
++-----------+---------------+----------------+---------------+-----------------+-----------+------------------+-----------------+
+5 rows in set (0.00 sec)
+
+
+11) Modify the column Member_name. Decrease the width of the member
+name to 20 characters. (If it does not allow state the reason for that)
+
+Ans:-mysql> alter table member
+    -> modify column member_name varchar(20);
+Query OK, 5 rows affected (0.08 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> desc member;
++------------------+--------------+------+-----+---------+-------+
+| Field            | Type         | Null | Key | Default | Extra |
++------------------+--------------+------+-----+---------+-------+
+| member_id        | int          | NO   | PRI | NULL    |       |
+| member_name      | varchar(20)  | YES  |     | NULL    |       |
+| member_address   | varchar(30)  | YES  |     | NULL    |       |
+| acc_open_date    | date         | YES  |     | NULL    |       |
+| membership_type  | varchar(20)  | YES  |     | NULL    |       |
+| fees_paid        | int          | YES  |     | NULL    |       |
+| max_book_allowed | int          | YES  |     | NULL    |       |
+| peanalty_amount  | decimal(7,2) | YES  |     | NULL    |       |
++------------------+--------------+------+-----+---------+-------+
+8 rows in set (0.00 sec)
+
+
+12) Try to insert a record with Max_Books_Allowed = 110, Observe the
+error that comes
+
+
+Ans:-mysql>  insert into member(member_id ,member_name,member_address, acc_open_date, membership_type, fees_paid, max_book_allowed, peanalty_amount)
+    ->  values(6,'rohit sharma','mumbai','2011-12-15','lifetime',25000,110,40.00);
+Query OK, 1 row affected (0.01 sec)
+mysql> table member;
++-----------+---------------+----------------+---------------+-----------------+-----------+------------------+-----------------+
+| member_id | member_name   | member_address | acc_open_date | membership_type | fees_paid | max_book_allowed | peanalty_amount |
++-----------+---------------+----------------+---------------+-----------------+-----------+------------------+-----------------+
+|         1 | richa sharma  | pune           | 2010-12-05    | lifetime        |     25000 |                5 |           50.00 |
+|         2 | garima sharma | pune           | 2025-09-26    | annual          |      1000 |                3 |            NULL |
+|         3 | sammy         | akola          | 2020-08-03    | Quarterly       |      5000 |                8 |           35.12 |
+|         4 | harsh         | wakad          | 2022-05-23    | half yearly     |      1000 |                3 |            NULL |
+|         5 | nikita        | alapur         | 2025-03-12    | Annual          |     10000 |                5 |          120.25 |
+|         6 | rohit sharma  | mumbai         | 2011-12-15    | lifetime        |     25000 |              110 |           40.00 |
++-----------+---------------+----------------+---------------+-----------------+-----------+------------------+-----------------+
+6 rows in set (0.00 sec)
+
+
+13) Generate another table named Member101 using a Create command
+along with a simple SQL query on member table
+
+mysql> create table member101 as(select*from member);
+Query OK, 6 rows affected (0.04 sec)
+Records: 6  Duplicates: 0  Warnings: 0
+
+mysql> table member101;
++-----------+---------------+----------------+---------------+-----------------+-----------+------------------+-----------------+
+| member_id | member_name   | member_address | acc_open_date | membership_type | fees_paid | max_book_allowed | peanalty_amount |
++-----------+---------------+----------------+---------------+-----------------+-----------+------------------+-----------------+
+|         1 | richa sharma  | pune           | 2010-12-05    | lifetime        |     25000 |                5 |           50.00 |
+|         2 | garima sharma | pune           | 2025-09-26    | annual          |      1000 |                3 |            NULL |
+|         3 | sammy         | akola          | 2020-08-03    | Quarterly       |      5000 |                8 |           35.12 |
+|         4 | harsh         | wakad          | 2022-05-23    | half yearly     |      1000 |                3 |            NULL |
+|         5 | nikita        | alapur         | 2025-03-12    | Annual          |     10000 |                5 |          120.25 |
+|         6 | rohit sharma  | mumbai         | 2011-12-15    | lifetime        |     25000 |              110 |           40.00 |
++-----------+---------------+----------------+---------------+-----------------+-----------+------------------+-----------------+
+6 rows in set (0.00 sec)
+
+14) Add the constraints on columns max_books_allowed and penalty_amt
+as follows
+a. max_books_allowed < 100
+b. penalty_amt maximum 1000
+Also give names to the constraints
+
+Ans:-
+mysql> ALTER TABLE member
+    -> ADD CONSTRAINT chk_max_books CHECK (max_book_allowed < 100),
+    -> ADD CONSTRAINT chk_penalty_amt CHECK (peanalty_amount <= 1000);
+Query OK, 6 rows affected (0.18 sec)
+Records: 6  Duplicates: 0  Warnings: 0
+
+
+15) Drop the table books
+
+
+Ans:-
+mysql> drop table books;
+Query OK, 0 rows affected (0.05 sec)
+
+
+16) Create table Books again as per the schema description with the
+following constraints.
+a. Book_No – Primary Key
+b. Book_Name – Not Null
+c. Category – System, Fiction, Database, RDBMS, Others
+
+
+Ans:-mysql> create table books
+    -> (book_no int primary key,
+    -> book_name varchar(100) not null,
+    -> category enum('System','Fiction','Database','RDBMS','Others')
+    -> );
+Query OK, 0 rows affected (0.04 sec)
+
+17) Insert data in Book table as follows
+
+
+Ans:-
+mysql> table books;
++---------+---------------------+--------------+--------+----------+
+| book_no | book_name           | author       | cost   | category |
++---------+---------------------+--------------+--------+----------+
+|     101 | let us c            | denis ritche | 450.00 | System   |
+|     102 | oracle-complete ref | loni         | 550.00 | Database |
+|     103 | mastering sql       | loni         | 550.00 | Database |
+|     104 | pl sql-ref          | scott urman  | 750.00 | Database |
++---------+---------------------+--------------+--------+----------+
+4 rows in set (0.00 sec)
+
+
+18) Insert more records in Book table
+
+
+Ans:-
+
+
+
+
+mysql> insert into books(book_no,book_name,author,cost,category)
+    -> values(105,'sql basic','loni',510,'system'),
+    -> (106,'sql masters','sammy',450,'database')
+    -> ;
+Query OK, 2 rows affected (0.01 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> table books;
++---------+---------------------+--------------+--------+----------+
+| book_no | book_name           | author       | cost   | category |
++---------+---------------------+--------------+--------+----------+
+|     101 | let us c            | denis ritche | 450.00 | System   |
+|     102 | oracle-complete ref | loni         | 550.00 | Database |
+|     103 | mastering sql       | loni         | 550.00 | Database |
+|     104 | pl sql-ref          | scott urman  | 750.00 | Database |
+|     105 | sql basic           | loni         | 510.00 | System   |
+|     106 | sql masters         | sammy        | 450.00 | Database |
++---------+---------------------+--------------+--------+----------+
+6 rows in set (0.00 sec)
+
+
+19) View the data in the tables using simple SQL query
+
+
+Ans:-
+mysql> select * from books;
++---------+---------------------+--------------+--------+----------+
+| book_no | book_name           | author       | cost   | category |
++---------+---------------------+--------------+--------+----------+
+|     101 | let us c            | denis ritche | 450.00 | System   |
+|     102 | oracle-complete ref | loni         | 550.00 | Database |
+|     103 | mastering sql       | loni         | 550.00 | Database |
+|     104 | pl sql-ref          | scott urman  | 750.00 | Database |
+|     105 | sql basic           | loni         | 510.00 | System   |
+|     106 | sql masters         | sammy        | 450.00 | Database |
++---------+---------------------+--------------+--------+----------+
+6 rows in set (0.00 sec)
+
+
+20) Insert into Book following data
+105, National Geographic, Adis Scott, 1000, Science
+
+Ans:-
+mysql> insert into books(book_no ,book_name,author,cost,category)
+    -> values(105,'National Geographic','Adis Scott',1000,'science');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> table books;
++---------+---------------------+--------------+---------+----------+
+| book_no | book_name           | author       | cost    | category |
++---------+---------------------+--------------+---------+----------+
+|     101 | let us c            | denis ritche |  450.00 | System   |
+|     102 | oracle-complete ref | loni         |  550.00 | Database |
+|     103 | mastering sql       | loni         |  550.00 | Database |
+|     104 | pl sql-ref          | scott urman  |  750.00 | Database |
+|     105 | National Geographic | Adis Scott   | 1000.00 | Science  |
++---------+---------------------+--------------+---------+----------+
+5 rows in set (0.00 sec)
+
+
+
+21) Rename the table Lib_Issue to Issue
+
+
+Ans:-mysql> RENAME TABLE Lib_Issue TO Issue;
+Query OK, 0 rows affected (0.04 sec)
+
+
+
+22) Drop table Issue
+
+
+Ans:-mysql> drop table issue;
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> show tables;
++--------------------------+
+| Tables_in_assingment_no2 |
++--------------------------+
+| books                    |
+| member                   |
+| member101                |
++--------------------------+
+3 rows in set (0.00 sec)
+
+
+23) As per the given structure Create table Issue again with following
+constraints.
+
+ Lib_Issue_Id-Primary key
+ Book_No- foreign key
+ Member_id - foreign key
+ Issue_date
+ Return_date
+
+Ans:-
+mysql> create table issue
+    -> (lib_issue_id int primary key,
+    -> book_no int,
+    -> member_id int,
+    -> issue_date date,
+    -> return_date date,
+    -> FOREIGN KEY (Book_No) REFERENCES Books(book_no),
+    ->  FOREIGN KEY (Member_id) REFERENCES Member(member_id)
+    -> );
+Query OK, 0 rows affected (0.13 sec)
+
+mysql> desc issue;
++--------------+------+------+-----+---------+-------+
+| Field        | Type | Null | Key | Default | Extra |
++--------------+------+------+-----+---------+-------+
+| lib_issue_id | int  | NO   | PRI | NULL    |       |
+| book_no      | int  | YES  | MUL | NULL    |       |
+| member_id    | int  | YES  | MUL | NULL    |       |
+| issue_date   | date | YES  |     | NULL    |       |
+| return_date  | date | YES  |     | NULL    |       |
++--------------+------+------+-----+---------+-------+
+5 rows in set (0.01 sec)
+
+
+
+
+24) Insert following data into Issue table
+
+Ans:-
+mysql> insert into issue(lib_issue_id,book_no,member_id,issue_date,return_date)
+    -> values(7001,101,2,'10-dec-06',null),
+    -> (7002,102,2,'25-dec-06',null),
+    -> (7003,104,1,'15-jan-06',null),
+    -> (7004,101,1,'04-july-06',null),
+    -> (7005,104,2,'15-nov-06',null),
+    -> (7006,101,3,'18-feb-06',null)
+    -> ;
+Query OK, 6 rows affected (0.02 sec)
+Records: 6  Duplicates: 0  Warnings: 0
+
+mysql> table issue;
++--------------+---------+-----------+------------+-------------+
+| lib_issue_id | book_no | member_id | Issue_date | Return_date |
++--------------+---------+-----------+------------+-------------+
+|         7001 |     101 |         2 | 10-dec-06  | NULL        |
+|         7002 |     102 |         2 | 25-dec-06  | NULL        |
+|         7003 |     104 |         1 | 15-jan-06  | NULL        |
+|         7004 |     101 |         1 | 04-july-06 | NULL        |
+|         7005 |     104 |         2 | 15-nov-06  | NULL        |
+|         7006 |     101 |         3 | 18-feb-06  | NULL        |
++--------------+---------+-----------+------------+-------------+
+6 rows in set (0.01 sec)
+
+
+25) Remove the constraints on Issue table
+
+Ans:-
+mysql> alter table issue
+    -> modify column lib_issue_id int;
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table issue
+    -> DROP FOREIGN KEY issue_ibfk_1;
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table issue
+    -> DROP FOREIGN KEY issue_ibfk_2;
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+
+26) Insert a record in Issue table. The member_id should not exist in
+
+member table
+
+
+Ans:-
+mysql> insert into Issue (Lib_Issue_Id, Book_No, Member_id, Issue_date, Return_date)
+    -> values (7012, 105, 999, '01-Jan-2007', NULL);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> table issue;
++--------------+---------+-----------+-------------+-------------+
+| lib_issue_id | book_no | member_id | Issue_date  | Return_date |
++--------------+---------+-----------+-------------+-------------+
+|         7001 |     101 |         2 | 10-dec-06   | NULL        |
+|         7002 |     102 |         2 | 25-dec-06   | NULL        |
+|         7003 |     104 |         1 | 15-jan-06   | NULL        |
+|         7004 |     101 |         1 | 04-july-06  | NULL        |
+|         7005 |     104 |         2 | 15-nov-06   | NULL        |
+|         7006 |     101 |         3 | 18-feb-06   | NULL        |
+|         7012 |     105 |       999 | 01-Jan-2007 | NULL        |
++--------------+---------+-----------+-------------+-------------+
+
+
+
+27) Now enable the constraints of Issue table. Observe the error
+
+Ans:-mysql> ALTER TABLE Issue
+    -> ADD PRIMARY KEY (Lib_Issue_Id),
+    -> ADD CONSTRAINT fk_book FOREIGN KEY (Book_No) REFERENCES Books(book_no),
+    -> ADD CONSTRAINT fk_member FOREIGN KEY (Member_id) REFERENCES Member(member_id);
+ERROR 1068 (42000): Multiple primary key defined
+
+
+28) Delete the record inserted at Q-27) and enable the constraints
+
+Ans:-mysql> delete from issue where
+    -> lib_issue_id =7012;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> ALTER TABLE Issue
+    -> ADD CONSTRAINT fk_book FOREIGN KEY (Book_No) REFERENCES Books(book_no),
+    -> ADD CONSTRAINT fk_member FOREIGN KEY (Member_id) REFERENCES Member(member_id);
+Query OK, 6 rows affected (0.13 sec)
+Records: 6  Duplicates: 0  Warnings: 0
+
+29) Try to delete the record of member id 1 from member table and
+
+observe the error 
+
+
+Ans:-
+mysql> delete from member
+    -> where member_id=1;
+ERROR 1451 (23000): Cannot delete or update a parent row: a foreign key constraint fails (`assingment_no2`.`issue`, CONSTRAINT `fk_member` FOREIGN KEY (`member_id`) REFERENCES `member` (`member_id`))
+
+
+30) View the data and structure of all the three tables Member,
+
+Issue, Book
+
+Ans:-mysql> desc member;
++------------------+--------------+------+-----+---------+-------+
+| Field            | Type         | Null | Key | Default | Extra |
++------------------+--------------+------+-----+---------+-------+
+| member_id        | int          | NO   | PRI | NULL    |       |
+| member_name      | varchar(20)  | YES  |     | NULL    |       |
+| member_address   | varchar(30)  | YES  |     | NULL    |       |
+| acc_open_date    | date         | YES  |     | NULL    |       |
+| membership_type  | varchar(20)  | YES  |     | NULL    |       |
+| fees_paid        | int          | YES  |     | NULL    |       |
+| max_book_allowed | int          | YES  |     | NULL    |       |
+| peanalty_amount  | decimal(7,2) | YES  |     | NULL    |       |
++------------------+--------------+------+-----+---------+-------+
+8 rows in set (0.00 sec)
+
+mysql> desc issue;
++--------------+-------------+------+-----+---------+-------+
+| Field        | Type        | Null | Key | Default | Extra |
++--------------+-------------+------+-----+---------+-------+
+| lib_issue_id | int         | NO   | PRI | NULL    |       |
+| book_no      | int         | YES  | MUL | NULL    |       |
+| member_id    | int         | YES  | MUL | NULL    |       |
+| Issue_date   | varchar(20) | YES  |     | NULL    |       |
+| Return_date  | varchar(20) | YES  |     | NULL    |       |
++--------------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> desc books;
++-----------+----------------------------------------------------------------+------+-----+---------+-------+
+| Field     | Type                                                           | Null | Key | Default | Extra |
++-----------+----------------------------------------------------------------+------+-----+---------+-------+
+| book_no   | int                                                            | NO   | PRI | NULL    |       |
+| book_name | varchar(100)                                                   | NO   |     | NULL    |       |
+| author    | varchar(30)                                                    | YES  |     | NULL    |       |
+| cost      | decimal(7,2)                                                   | YES  |     | NULL    |       |
+| category  | enum('System','Fiction','Database','RDBMS','Others','Science') | YES  |     | NULL    |       |
++-----------+----------------------------------------------------------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+mysql> select * from member;
++-----------+---------------+----------------+---------------+-----------------+-----------+------------------+-----------------+
+| member_id | member_name   | member_address | acc_open_date | membership_type | fees_paid | max_book_allowed | peanalty_amount |
++-----------+---------------+----------------+---------------+-----------------+-----------+------------------+-----------------+
+|         1 | richa sharma  | pune           | 2010-12-05    | lifetime        |     25000 |                5 |           50.00 |
+|         2 | garima sharma | pune           | 2025-09-26    | annual          |      1000 |                3 |            NULL |
+|         3 | sammy         | akola          | 2020-08-03    | Quarterly       |      5000 |                8 |           35.12 |
+|         4 | harsh         | wakad          | 2022-05-23    | half yearly     |      1000 |                3 |            NULL |
+|         5 | nikita        | alapur         | 2025-03-12    | Annual          |     10000 |                5 |          120.25 |
+|         6 | rohit sharma  | mumbai         | 2011-12-15    | lifetime        |     25000 |               99 |           40.00 |
++-----------+---------------+----------------+---------------+-----------------+-----------+------------------+-----------------+
+6 rows in set (0.01 sec)
+
+mysql> select * from issue;
++--------------+---------+-----------+------------+-------------+
+| lib_issue_id | book_no | member_id | Issue_date | Return_date |
++--------------+---------+-----------+------------+-------------+
+|         7001 |     101 |         2 | 10-dec-06  | NULL        |
+|         7002 |     102 |         2 | 25-dec-06  | NULL        |
+|         7003 |     104 |         1 | 15-jan-06  | NULL        |
+|         7004 |     101 |         1 | 04-july-06 | NULL        |
+|         7005 |     104 |         2 | 15-nov-06  | NULL        |
+|         7006 |     101 |         3 | 18-feb-06  | NULL        |
++--------------+---------+-----------+------------+-------------+
+6 rows in set (0.00 sec)
+
+mysql> select * from books;
++---------+---------------------+--------------+---------+----------+
+| book_no | book_name           | author       | cost    | category |
++---------+---------------------+--------------+---------+----------+
+|     101 | let us c            | denis ritche |  450.00 | System   |
+|     102 | oracle-complete ref | loni         |  550.00 | Database |
+|     103 | mastering sql       | loni         |  550.00 | Database |
+|     104 | pl sql-ref          | scott urman  |  750.00 | Database |
+|     105 | National Geographic | Adis Scott   | 1000.00 | Science  |
++---------+---------------------+--------------+---------+----------+
+5 rows in set (0.01 sec)
+
+31) Modify the Return_Date of 7004,7005 to 15 days after the
+
+Issue_date
+
+Ans:-
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

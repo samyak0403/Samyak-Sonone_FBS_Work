@@ -1,0 +1,208 @@
+1. Write a SQL statement to insert a record as follows:
+Employees,Deapartment
+
+
+Ans:-mysql> table employees;
++-------------+------------+-----------+------------+--------------+------------+---------+-----------+---------------+---------------+------------+
+| employee_id | first_name | last_name | email      | phone_number | hire_date  | job_id  | salary    | commision_pct | department_id | manager_id |
++-------------+------------+-----------+------------+--------------+------------+---------+-----------+---------------+---------------+------------+
+|         100 | Steven     | King      | SKING      | 515.123.4567 | 1987-06-17 | AD_PRES |  24000.00 |          0.00 |            10 |        200 |
+|         101 | Neena      | Kochhar   | NKOCHHAR   | 515.123.4568 | 1987-06-18 | AD_VP   | 170000.00 |          0.00 |            10 |        200 |
+|         102 | Lex        | Dehann    | LDEHAAN    | 515.123.4569 | 1987-06-19 | AD_VP   |  17000.00 |          0.00 |            10 |        200 |
+|         103 | alexander  | Dehaan    | AHUNOLD    | 590.423.4567 | 1987-06-20 | IT_PROG |   9000.00 |          0.00 |            60 |        103 |
+|         104 | bruce      | Ernst     | BERNST     | 590.423.4568 | 1987-06-21 | IT_PROG |   6000.00 |          0.00 |            60 |        103 |
+|         105 | David      | Austin    | DAUSTIN    | 590.423.4560 | 1987-06-22 | IT_PROG |   4800.00 |          0.00 |            60 |        103 |
+|         106 | Valli      | Pataballa | VDATABAL   | 590.423.4560 | 1987-06-23 | IT_PROG |   4800.00 |          0.00 |            60 |        103 |
+|         107 | Diana      | Lorenz    | DILORENTZ  | 590.423.4567 | 1987-06-24 | IT_PROG |   4200.00 |          0.00 |            30 |        114 |
+|         108 | nancy      | Greenbery | NGREENREBE | 515.129.4569 | 1987-06-24 | SA_MAN  |  12000.00 |          0.00 |            80 |        145 |
+|         109 | Daniel     | Faviet    | DFAVIET    | 515.124.4169 | 1987-06-26 | SA_MAN  |   9000.00 |          0.00 |            80 |        145 |
++-------------+------------+-----------+------------+--------------+------------+---------+-----------+---------------+---------------+------------+
+10 rows in set (0.00 sec)
+
+
+ERROR 1146 (42S02): Table 'assingment_no1.deapartment' doesn't exist
+mysql> table department;
++---------------+-----------------+------------+-------------+
+| DEPARTMENT_ID | DEPARTMENT_NAME | MANAGER_ID | LOCATION_ID |
++---------------+-----------------+------------+-------------+
+|            10 | Administration  |        200 |        1700 |
+|            20 | marketing       |        201 |        1800 |
+|            30 | purchasing      |        114 |        1700 |
+|            40 | human-resources |        203 |        2400 |
+|            50 | shipping        |        121 |        1500 |
+|            60 | IT              |        103 |        1400 |
+|            70 | public-relation |        204 |        2700 |
+|            80 | sales           |        145 |        2500 |
++---------------+-----------------+------------+-------------+
+8 rows in set (0.00 sec)
+
+
+
+2. Write a SQL statement to insert 3 rows by a single insert statement
+
+Ans:-
+
+
+
+3. Write a SQL statement to insert one row in jobs table to ensure that no duplicate
+value will be entered in the job_id column
+
+Ans:-mysql>  insert into jobs(job_id,job_title,min_salary,max_salary)
+    ->  values('AD_ASST','administraion_assistant',3000.00,6000),
+    -> ('FI_MGR','finance_manager',8200.00,16000),
+    -> ('AC_MGR','accontant',4200.00,9000.00),
+    -> ('AC_ACCOUNT','public_accountant',4200,9000),
+    -> ('SA_MAN','sales_manger',10000.00,20000.00);
+Query OK, 5 rows affected (0.01 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> select * from jobs;
++------------+-------------------------------+------------+------------+
+| job_id     | job_title                     | min_salary | max_salary |
++------------+-------------------------------+------------+------------+
+| AC_ACCOUNT | public_accountant             |    4200.00 |    9000.00 |
+| AC_MGR     | accontant                     |    4200.00 |    9000.00 |
+| AD_ASST    | administraion_assistant       |    3000.00 |    6000.00 |
+| AD_PRESS   | presidant                     |   20000.00 |   40000.00 |
+| AD_VP      | administration_vice_president |    5000.00 |   30000.00 |
+| FI_MGR     | finance_manager               |    8200.00 |   16000.00 |
+| SA_MAN     | sales_manger                  |   10000.00 |   20000.00 |
++------------+-------------------------------+------------+------------+
+7 rows in set (0.00 sec)
+
+
+4. Write SQL statement to increment salary of each emp by 10%
+
+Ans:-mysql> UPDATE employees
+    -> SET salary = salary * 1.10;
+Query OK, 10 rows affected (0.01 sec)
+Rows matched: 10  Changed: 10  Warnings: 0
+
+5. Write a SQL statement to change the email column of employees table with 'not
+available' for those employees whose department_id is 80 and gets a
+commission is less than .20%
+
+Ans:-mysql> UPDATE employees
+    -> SET email = 'not available'
+    -> WHERE department_id = 80
+    ->   AND commision_pct < 0.20;
+Query OK, 2 rows affected (0.01 sec)
+Rows matched: 2  Changed: 2  Warnings: 0
+
+6. Write a SQL statement to change the email column of employees table with 'not
+available' for those employees who belongs to the 'Purchasing' department
+
+Ans:-update employees
+set email='not avilable'
+where DEPARTMENT_NAME=' at line 3
+mysql> UPDATE employees
+    -> SET email = 'not available'
+    -> WHERE department_id = (
+    ->     SELECT department_id
+    ->     FROM department
+    ->     WHERE department_name = 'Purchasing'
+    -> );
+Query OK, 1 row affected (0.02 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+7. Write a SQL statement to change the email and commission_pct column of
+employees table with 'not available' and 0.10 for all employees
+
+
+Ans:-
+mysql> UPDATE employees
+    -> SET email = 'not available',
+    ->     commision_pct = 0.10;
+Query OK, 10 rows affected (0.01 sec)
+Rows matched: 10  Changed: 10  Warnings: 0
+mysql> table employees;
++-------------+------------+-----------+---------------+--------------+------------+---------+-----------+---------------+---------------+------------+
+| employee_id | first_name | last_name | email         | phone_number | hire_date  | job_id  | salary    | commision_pct | department_id | manager_id |
++-------------+------------+-----------+---------------+--------------+------------+---------+-----------+---------------+---------------+------------+
+|         100 | Steven     | King      | not available | 515.123.4567 | 1987-06-17 | AD_PRES |  26400.00 |          0.10 |            10 |        200 |
+|         101 | Neena      | Kochhar   | not available | 515.123.4568 | 1987-06-18 | AD_VP   | 187000.00 |          0.10 |            10 |        200 |
+|         102 | Lex        | Dehann    | not available | 515.123.4569 | 1987-06-19 | AD_VP   |  18700.00 |          0.10 |            10 |        200 |
+|         103 | alexander  | Dehaan    | not available | 590.423.4567 | 1987-06-20 | IT_PROG |   9900.00 |          0.10 |            60 |        103 |
+|         104 | bruce      | Ernst     | not available | 590.423.4568 | 1987-06-21 | IT_PROG |   6600.00 |          0.10 |            60 |        103 |
+|         105 | David      | Austin    | not available | 590.423.4560 | 1987-06-22 | IT_PROG |   5280.00 |          0.10 |            60 |        103 |
+|         106 | Valli      | Pataballa | not available | 590.423.4560 | 1987-06-23 | IT_PROG |   5280.00 |          0.10 |            60 |        103 |
+|         107 | Diana      | Lorenz    | not available | 590.423.4567 | 1987-06-24 | IT_PROG |   4620.00 |          0.10 |            30 |        114 |
+|         108 | nancy      | Greenbery | not available | 515.129.4569 | 1987-06-24 | SA_MAN  |  13200.00 |          0.10 |            80 |        145 |
+|         109 | Daniel     | Faviet    | not available | 515.124.4169 | 1987-06-26 | SA_MAN  |   9900.00 |          0.10 |            80 |        145 |
++-------------+------------+-----------+---------------+--------------+------------+---------+-----------+---------------+---------------+------------+
+10 rows in set (0.00 sec)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
